@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+    <style>
+      body {
+        background-color: lightgray;
+        margin: 0px;
+        padding: 0px;
+      }
+      canvas {
+          background-color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="myCanvas" width="750" height="750"></canvas>
+    <script>
+      function getMousePos(canvas, evt) {
+        var rect = canvas.getBoundingClientRect();
+        return {
+          x: evt.clientX - rect.left,
+          y: evt.clientY - rect.top
+        };
+      }
+      var canvas = document.getElementById('myCanvas');
+      var context = canvas.getContext('2d');
+      
+      isD = false;
+      
+      canvas.onmousedown = function (evt){
+          isD = true;
+      };
+      
+      canvas.onmouseup = function  (evt){
+          isD = false;
+      };
+      
+      canvas.addEventListener('mousemove', function(evt) {
+        if(isD){
+            var mousePos = getMousePos(canvas, evt);
+            context.lineJoin = "round";
+            context.fillRect(mousePos.x,mousePos.y,5,5);
+        }     
+      }, false);
+
+      
+    </script>
+  </body>
+</html>
